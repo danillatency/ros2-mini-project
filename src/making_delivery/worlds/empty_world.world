@@ -3,5 +3,11 @@
     <world name="empty">
         <include><uri>model://ground_plane</uri></include>
         <include><uri>model://sun</uri></include>
+        <gui>
+            <camera name="camera">
+                <pose>40 40 40 0 0.5 3.95</pose> <!--camera forward axis is x, rotation in radians-->
+                <clip><near>1</near><far>1000</far></clip>
+            </camera>
+        </gui>
     </world>
 </sdf>
