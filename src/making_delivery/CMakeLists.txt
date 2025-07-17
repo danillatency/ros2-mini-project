@@ -21,8 +21,9 @@ install(TARGETS
 
 install(DIRECTORY
         launch
-        models
+        robots
         worlds
+        rviz
         DESTINATION share/${PROJECT_NAME}
 )
 

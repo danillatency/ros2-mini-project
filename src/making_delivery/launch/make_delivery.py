@@ -1,39 +1,49 @@
 import os
 
 from launch import LaunchDescription
-from launch.actions import ExecuteProcess, SetEnvironmentVariable
+from launch.actions import ExecuteProcess, SetEnvironmentVariable, IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 
 
+def name_of_tag(tag, xml_path):
+    string_to_find = f"{tag} name=\""
+    found = str()
+    extracted_name = str()
+    for character in open(xml_path, 'r', encoding="utf-8").read():
+        if found == string_to_find:
+            if character == '"':
+                return extracted_name
+            else:
+                extracted_name += character
+            continue
+        if string_to_find[len(found)] == character:
+            found += character
+        else:
+            found = str()
+
+
 def generate_launch_description():
     package_path = get_package_share_directory("making_delivery")
-    world_path = os.path.join(package_path, "worlds", "empty_world.world")
-    models_path = os.path.join(package_path, "models")
-    model_sdf = os.path.join(models_path, "deliverer", "model.sdf")
-    rviz_config = os.path.join(package_path, "rviz", "config.rviz")
-
-    gazebo_node = Node(
-        package="gazebo_ros",
-        executable="spawn_entity.py",
-        output="screen",
-        arguments=["-file", model_sdf, "-entity", "deliverer", "-x", '0', "-y", '0', "-z", '0']
-    )
+    world_path = os.path.join(package_path, "worlds", "delivery_world.sdf")
+    model_path = os.path.join(package_path, "robots", "deliverer.sdf")
+    rviz_config_path = os.path.join(package_path, "rviz", "config.rviz")
+    world_name = name_of_tag("world", world_path)
+    model_name = name_of_tag("model", model_path)
 
     robot_state_publisher_node = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
-        output="screen",
         parameters=[{
-            "robot_description": open(model_sdf, 'r', encoding="utf-8").read()
+            "robot_description": open(model_path, 'r', encoding="utf-8").read()
         }]
     )
 
     rviz_node = Node(
         package="rviz2",
         executable="rviz2",
-        output="screen",
-        arguments=["-d", rviz_config]
+        arguments=["-d", rviz_config_path]
     )
 
     left_front_wheel_rotating = Node(
@@ -42,16 +52,23 @@ def generate_launch_description():
         output="screen"
     )
 
+    gazebo_world_launcher = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(get_package_share_directory("ros_gz_sim"), "launch", "gz_sim.launch.py")
+        ),
+        launch_arguments={"gz_args": world_path}.items()
+    )
+
+    gazebo_spawn_node = Node(
+        package="ros_gz_sim",
+        executable="create",
+        arguments=["-world", world_name, "-file", model_path, model_name, "-x", "0", "-y", "0", "-z", "0"]
+    )
+
     return LaunchDescription([
         robot_state_publisher_node,
         left_front_wheel_rotating,
         rviz_node,
-        SetEnvironmentVariable("GAZEBO_MODEL_PATH", models_path),
-        ExecuteProcess(
-            cmd=["gazebo", "--verbose", world_path, "-s", "libgazebo_ros_factory.so",
-                 "-s", "libgazebo_ros_api_plugin.so",
-                 "-s", "libgazebo_ros_paths_plugin.so"],
-            output="screen"
-        ),
-        gazebo_node
+        gazebo_world_launcher,
+        gazebo_spawn_node
     ])
