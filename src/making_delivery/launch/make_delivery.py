@@ -65,10 +65,24 @@ def generate_launch_description():
         arguments=["-world", world_name, "-file", model_path, model_name, "-x", "0", "-y", "0", "-z", "0"]
     )
 
+    ros_to_gazebo_forces_bridge_node = Node(
+        package="ros_gz_bridge",
+        executable="parameter_bridge",
+        arguments=[f"/world/{world_name}/wrench@ros_gz_interfaces/msg/EntityWrench]gz.msgs.EntityWrench"]
+    )
+
+    gazebo_to_ros_coordinates_bridge_node = Node(
+        package="ros_gz_bridge",
+        executable="parameter_bridge",
+        arguments=[f"/world/{world_name}/pose/info@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V"]
+    )
+
     return LaunchDescription([
         robot_state_publisher_node,
         left_front_wheel_rotating,
         rviz_node,
         gazebo_world_launcher,
-        gazebo_spawn_node
+        gazebo_spawn_node,
+        ros_to_gazebo_forces_bridge_node,
+        gazebo_to_ros_coordinates_bridge_node
     ])

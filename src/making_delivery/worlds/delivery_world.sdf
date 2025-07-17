@@ -1,7 +1,8 @@
 <?xml version="1.0" ?>
 <sdf version="1.10">
     <world name="empty_world">
-        <physics name="1ms" type="ignored">
+
+        <physics name="1ms" type="ignored">  <!--default from gazebo sim docs-->
             <max_step_size>0.001</max_step_size>
             <real_time_factor>1.0</real_time_factor>
         </physics>
@@ -12,13 +13,18 @@
         <plugin
             filename="gz-sim-user-commands-system"
             name="gz::sim::systems::UserCommands">
-        </plugin>
+        </plugin>  <!--default from gazebo sim docs-->
         <plugin
             filename="gz-sim-scene-broadcaster-system"
             name="gz::sim::systems::SceneBroadcaster">
+        </plugin>  <!--default from gazebo sim docs-->
+
+        <plugin name="gz::sim::systems::ApplyLinkWrench" filename="gz-sim-apply-link-wrench-system" />
+        <plugin name="gz::sim::systems::PosePublisher" filename="gz-sim-pose-publisher-system">
+            <publish_nested_model_pose>true</publish_nested_model_pose>
         </plugin>
 
-        <light type="directional" name="sun">
+        <light type="directional" name="sun">  <!--default from gazebo sim docs-->
             <cast_shadows>true</cast_shadows>
             <pose>0 0 10 0 0 0</pose>
             <diffuse>0.8 0.8 0.8 1</diffuse>
@@ -32,7 +38,7 @@
             <direction>-0.5 0.1 -0.9</direction>
         </light>
 
-        <model name="ground_plane">
+        <model name="ground_plane">  <!--default from gazebo sim docs-->
             <static>true</static>
             <link name="link">
                 <collision name="collision">
@@ -58,7 +64,7 @@
             </link>
         </model>
 
-        <gui fullscreen="0">
+        <gui fullscreen="0">  <!--default from gazebo sim docs-->
             <plugin filename="MinimalScene" name="3D View">
               <gz-gui>
                 <title>3D View</title>
@@ -84,6 +90,8 @@
                 <property key="state" type="string">floating</property>
                 <property key="showTitleBar" type="bool">false</property>
               </gz-gui>
-        </plugin></gui>
+            </plugin>
+        </gui>
+
     </world>
 </sdf>

@@ -10,9 +10,10 @@ find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
+find_package(ros_gz_interfaces REQUIRED)
 
 add_executable(left_front_wheel src/left_front_wheel.cpp)
-ament_target_dependencies(left_front_wheel rclcpp geometry_msgs tf2_ros tf2_geometry_msgs)
+ament_target_dependencies(left_front_wheel rclcpp geometry_msgs tf2_ros tf2_geometry_msgs ros_gz_interfaces)
 
 install(TARGETS
         left_front_wheel

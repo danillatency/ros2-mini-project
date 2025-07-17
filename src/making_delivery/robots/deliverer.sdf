@@ -37,7 +37,7 @@
     <joint name="left_front_wheel_joint" type="revolute">
         <parent>base_link</parent>
         <child>left_front_wheel_link</child>
-        <axis><xyz>0 1 0</xyz></axis>
+        <axis><xyz>0 0 1</xyz></axis>
     </joint>
 
     <link name="left_middle_wheel_link">
