@@ -23,6 +23,8 @@ install(TARGETS
 install(DIRECTORY
         launch
         robots
+        models
+        textures
         worlds
         rviz
         DESTINATION share/${PROJECT_NAME}

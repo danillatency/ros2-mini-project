@@ -78,6 +78,7 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        SetEnvironmentVariable("GZ_SIM_RESOURCE_PATH", os.path.join(package_path, "textures")),
         robot_state_publisher_node,
         left_front_wheel_rotating,
         rviz_node,
