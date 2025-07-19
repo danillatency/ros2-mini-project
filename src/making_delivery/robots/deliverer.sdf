@@ -88,7 +88,7 @@
             <geometry><box><size>3.5 3.5 2.36</size></box></geometry>
         </collision>
          <sensor name="gpu_lidar" type="gpu_lidar">
-                <topic>lidar</topic>
+                <topic>/lidar</topic>
                 <update_rate>10</update_rate>
                 <ray>
                     <scan>
