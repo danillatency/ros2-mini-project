@@ -92,6 +92,7 @@
                 <property key="showTitleBar" type="bool">false</property>
               </gz-gui>
             </plugin>
+            <plugin filename="VisualizeLidar" name="Visualize Lidar" />
         </gui>
 
     </world>
