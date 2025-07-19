@@ -28,6 +28,8 @@ def generate_launch_description():
     package_path = get_package_share_directory("making_delivery")
     world_path = os.path.join(package_path, "worlds", "delivery_world.sdf")
     model_path = os.path.join(package_path, "robots", "deliverer.sdf")
+    model_path1 = os.path.join(package_path, "robots", "deliverer_1.sdf")
+    model_path2 = os.path.join(package_path, "robots", "deliverer_2.sdf")
     rviz_config_path = os.path.join(package_path, "rviz", "config.rviz")
     world_name = name_of_tag("world", world_path)
     model_name = name_of_tag("model", model_path)
@@ -52,6 +54,18 @@ def generate_launch_description():
         output="screen"
     )
 
+    left_wheels_node = Node(
+        package="making_delivery",
+        executable="left_wheels",
+        output="screen"
+    )
+
+    lid_node = Node(
+        package="making_delivery",
+        executable="lid",
+        output="screen"
+    )
+
     gazebo_world_launcher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(get_package_share_directory("ros_gz_sim"), "launch", "gz_sim.launch.py")
@@ -62,7 +76,19 @@ def generate_launch_description():
     gazebo_spawn_node = Node(
         package="ros_gz_sim",
         executable="create",
-        arguments=["-world", world_name, "-file", model_path, model_name, "-x", "0", "-y", "0", "-z", "0"]
+        arguments=["-world", world_name, "-file", model_path, model_name, "-x", "0", "-y", "-30", "-z", "0"]
+    )
+
+    gazebo_spawn_node1 = Node(
+        package="ros_gz_sim",
+        executable="create",
+        arguments=["-world", world_name, "-file", model_path1, model_name + "_1", "-x", "30", "-y", "10", "-z", "0"]
+    )
+
+    gazebo_spawn_node2 = Node(
+        package="ros_gz_sim",
+        executable="create",
+        arguments=["-world", world_name, "-file", model_path2, model_name + "_2", "-x", "-30", "-y", "15", "-z", "0"]
     )
 
     ros_to_gazebo_forces_bridge_node = Node(
@@ -74,16 +100,19 @@ def generate_launch_description():
     gazebo_to_ros_coordinates_bridge_node = Node(
         package="ros_gz_bridge",
         executable="parameter_bridge",
-        arguments=[f"/world/{world_name}/pose/info@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V"]
+        arguments=[f"/world/{world_name}/pose/info@geometry_msgs/msg/PoseArray[gz.msgs.Pose_V"]
     )
 
     return LaunchDescription([
         SetEnvironmentVariable("GZ_SIM_RESOURCE_PATH", os.path.join(package_path, "textures")),
         # robot_state_publisher_node,
-        left_front_wheel_rotating,
         # rviz_node,
         gazebo_world_launcher,
         gazebo_spawn_node,
+        gazebo_spawn_node1,
+        gazebo_spawn_node2,
         ros_to_gazebo_forces_bridge_node,
-        gazebo_to_ros_coordinates_bridge_node
+        gazebo_to_ros_coordinates_bridge_node,
+        lid_node,
+        #left_wheels_node
     ])

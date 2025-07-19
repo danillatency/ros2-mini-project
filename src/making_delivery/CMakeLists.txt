@@ -12,11 +12,19 @@ find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(ros_gz_interfaces REQUIRED)
 
-add_executable(left_front_wheel src/left_front_wheel.cpp)
-ament_target_dependencies(left_front_wheel rclcpp geometry_msgs tf2_ros tf2_geometry_msgs ros_gz_interfaces)
+# add_executable(left_front_wheel src/left_wheels.cpp)
+# ament_target_dependencies(left_front_wheel rclcpp tf2_ros geometry_msgs tf2_geometry_msgs ros_gz_interfaces)
+
+add_executable(left_wheels src/left_wheels.cpp)
+ament_target_dependencies(left_wheels rclcpp tf2_ros geometry_msgs)
+
+add_executable(lid src/lid.cpp)
+ament_target_dependencies(lid rclcpp tf2_ros geometry_msgs ros_gz_interfaces tf2_geometry_msgs)
 
 install(TARGETS
-        left_front_wheel
+        left_wheels
+        lid
+        # left_front_wheel
         DESTINATION lib/${PROJECT_NAME}
 )
 

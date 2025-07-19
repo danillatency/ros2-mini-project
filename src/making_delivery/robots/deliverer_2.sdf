@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.10">
-<model name="deliverer">
+<model name="deliverer_2">
     <static>false</static>
 
     <link name="base_link">
@@ -87,7 +87,7 @@
         </collision>
         <sensor name="gpu_lidar" type="gpu_lidar">
              <pose>0 0 1.4 0 0 0</pose>
-             <topic>lidar</topic>
+             <topic>lidar2</topic>
              <update_rate>50</update_rate>
              <ray>
                  <scan>
