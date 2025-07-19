@@ -8,7 +8,6 @@
         <visual name="visual">
             <geometry><mesh><uri>file:///home/danil/Documents/ROSWorkspaces/RosMiniProject/src/making_delivery/models/rover.obj</uri></mesh></geometry>
             <material>
-                <ambient>1 1 1 1</ambient>
                 <diffuse>1 1 1 1</diffuse>
                 <pbr><metal>
                     <albedo_map>resources://T_Rover_BC_4K.png</albedo_map>
@@ -35,7 +34,6 @@
         <visual name="visual">
             <geometry><mesh><uri>file:///home/danil/Documents/ROSWorkspaces/RosMiniProject/src/making_delivery/models/lid.obj</uri></mesh></geometry>
             <material>
-                <ambient>1 1 1 1</ambient>
                 <diffuse>1 1 1 1</diffuse>
                 <pbr><metal>
                     <albedo_map>resources://T_Lid_BC_4K.png</albedo_map>
@@ -50,21 +48,6 @@
         </collision>
     </link>
 
-    <link name="flag_link">
-        <pose>3.0149 -7.38887 14.4931 0 0 0</pose>
-        <visual name="visual">
-            <geometry><mesh><uri>file:///home/danil/Documents/ROSWorkspaces/RosMiniProject/src/making_delivery/models/flag.obj</uri></mesh></geometry>
-            <material>
-                <ambient>1 1 1 1</ambient>
-                <diffuse>1 1 1 1</diffuse>
-                <pbr><metal>
-                    <albedo_map>resources://T_Flag_BC_4K.png</albedo_map>
-                    <roughness>1</roughness>
-                    <metalness>0</metalness>
-                </metal></pbr>
-            </material>
-        </visual>
-    </link>
     <joint name="lidar_joint" type="fixed">
         <parent>base_link</parent>
         <child>lidar_link</child>
@@ -74,7 +57,6 @@
         <visual name="visual">
             <geometry><mesh><uri>file:///home/danil/Documents/ROSWorkspaces/RosMiniProject/src/making_delivery/models/lidar.obj</uri></mesh></geometry>
             <material>
-                <ambient>1 1 1 1</ambient>
                 <diffuse>1 1 1 1</diffuse>
                 <pbr><metal>
                     <albedo_map>resources://T_Lidar_BC_4K.png</albedo_map>
@@ -87,139 +69,188 @@
             <pose>0 0 1.5 0 0 0</pose>
             <geometry><box><size>3.5 3.5 2.36</size></box></geometry>
         </collision>
-         <sensor name="gpu_lidar" type="gpu_lidar">
-                <topic>lidar</topic>
-                <update_rate>50</update_rate>
-                <ray>
-                    <scan>
-                        <horizontal>
-                            <samples>1</samples>
-                            <resolution>1</resolution>
-                            <min_angle>0</min_angle>
-                            <max_angle>6.28</max_angle>
-                        </horizontal>
-                        <vertical>
-                            <samples>1</samples>
-                            <resolution>1</resolution>
-                            <min_angle>0</min_angle>
-                            <max_angle>6.28</max_angle>
-                        </vertical>
-                    </scan>
-                    <range>
-                        <min>1</min>
-                        <max>20</max>
-                        <resolution>0.01</resolution>
-                    </range>
-                </ray>
-                <always_on>1</always_on>
-                <visualize>true</visualize>
-            </sensor>
+        <sensor name="gpu_lidar" type="gpu_lidar">
+             <pose>0 0 1.4 0 0 0</pose>
+             <topic>lidar</topic>
+             <update_rate>50</update_rate>
+             <ray>
+                 <scan>
+                     <horizontal>
+                         <samples>1</samples>
+                         <resolution>1</resolution>
+                         <min_angle>0</min_angle>
+                         <max_angle>6.28</max_angle>
+                     </horizontal>
+                     <vertical>
+                         <samples>1</samples>
+                         <resolution>1</resolution>
+                         <min_angle>0</min_angle>
+                         <max_angle>6.28</max_angle>
+                     </vertical>
+                 </scan>
+                 <range>
+                     <min>1</min>
+                     <max>20</max>
+                     <resolution>0.01</resolution>
+                 </range>
+             </ray>
+             <always_on>1</always_on>
+             <visualize>true</visualize>
+        </sensor>
+    </link>
+
+    <joint name="flag_joint" type="fixed">
+        <parent>base_link</parent>
+        <child>flag_link</child>
+    </joint>
+    <link name="flag_link">
+        <pose>3.0149 -7.38887 14.4931 0 0 0</pose>
+        <visual name="visual">
+            <geometry><mesh><uri>file:///home/danil/Documents/ROSWorkspaces/RosMiniProject/src/making_delivery/models/flag.obj</uri></mesh></geometry>
+            <material>
+                <diffuse>1 1 1 1</diffuse>
+                <pbr><metal>
+                    <albedo_map>resources://T_Flag_BC_4K.png</albedo_map>
+                    <roughness>1</roughness>
+                    <metalness>0</metalness>
+                </metal></pbr>
+            </material>
+        </visual>
     </link>
 
 
-    <link name="left_front_wheel_link">
-        <pose>10 10 5 1.57 0 0</pose>
+    <joint name="right_back_wheel_joint" type="revolute">
+        <parent>base_link</parent>
+        <child>right_back_wheel_link</child>
+        <axis><xyz>0 0 1</xyz></axis>
+    </joint>
+    <link name="right_back_wheel_link">
+        <pose>-4.61739 -8.67886 2.18565 1.57 0 0</pose>
         <visual name="visual">
-            <pose>0 0 -1.1 0 0 0</pose>
-            <geometry><box><size>5 5 5</size></box></geometry>
+            <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
+            <material>
+                <diffuse>0.01 0.01 0.01 1</diffuse>
+                <pbr><metal>
+                    <roughness>0</roughness>
+                    <metalness>0</metalness>
+                </metal></pbr>
+            </material>
         </visual>
         <collision name="collision">
-            <pose>0 0 -1.1 0 0 0</pose>
-            <geometry><cylinder><radius>2.5</radius><length>2</length></cylinder></geometry>
+            <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
-        <inertial>
-          <mass>50.0</mass>
-          <inertia>
-            <ixx>0.1</ixx>
-            <iyy>0.1</iyy>
-            <izz>0.1</izz>
-          </inertia>
-        </inertial>
     </link>
+
+    <joint name="right_middle_wheel_joint" type="revolute">
+        <parent>base_link</parent>
+        <child>right_middle_wheel_link</child>
+        <axis><xyz>0 0 1</xyz></axis>
+    </joint>
+    <link name="right_middle_wheel_link">
+        <pose>0 -8.67886 2.18565 1.57 0 0</pose>
+        <visual name="visual">
+            <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
+            <material>
+                <diffuse>0.01 0.01 0.01 1</diffuse>
+                <pbr><metal>
+                    <roughness>0</roughness>
+                    <metalness>0</metalness>
+                </metal></pbr>
+            </material>
+        </visual>
+        <collision name="collision">
+            <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
+        </collision>
+    </link>
+
+    <joint name="right_front_wheel_joint" type="revolute">
+        <parent>base_link</parent>
+        <child>right_front_wheel_link</child>
+        <axis><xyz>0 0 1</xyz></axis>
+    </joint>
+    <link name="right_front_wheel_link">
+        <pose>4.61739 -8.67886 2.18565 1.57 0 0</pose>
+        <visual name="visual">
+            <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
+            <material>
+                <diffuse>0.01 0.01 0.01 1</diffuse>
+                <pbr><metal>
+                    <roughness>0</roughness>
+                    <metalness>0</metalness>
+                </metal></pbr>
+            </material>
+        </visual>
+        <collision name="collision">
+            <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
+        </collision>
+    </link>
+
+
+    <joint name="left_back_wheel_joint" type="revolute">
+        <parent>base_link</parent>
+        <child>left_back_wheel_link</child>
+        <axis><xyz>0 0 1</xyz></axis>
+    </joint>
+    <link name="left_back_wheel_link">
+        <pose>-4.61739 8.67886 2.18565 1.57 0 0</pose>
+        <visual name="visual">
+            <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
+            <material>
+                <diffuse>0.01 0.01 0.01 1</diffuse>
+                <pbr><metal>
+                    <roughness>0</roughness>
+                    <metalness>0</metalness>
+                </metal></pbr>
+            </material>
+        </visual>
+        <collision name="collision">
+            <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
+        </collision>
+    </link>
+
+    <joint name="left_middle_wheel_joint" type="revolute">
+        <parent>base_link</parent>
+        <child>left_middle_wheel_link</child>
+        <axis><xyz>0 0 1</xyz></axis>
+    </joint>
+    <link name="left_middle_wheel_link">
+        <pose>0 8.67886 2.18565 1.57 0 0</pose>
+        <visual name="visual">
+            <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
+            <material>
+                <diffuse>0.01 0.01 0.01 1</diffuse>
+                <pbr><metal>
+                    <roughness>0</roughness>
+                    <metalness>0</metalness>
+                </metal></pbr>
+            </material>
+        </visual>
+        <collision name="collision">
+            <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
+        </collision>
+    </link>
+
     <joint name="left_front_wheel_joint" type="revolute">
         <parent>base_link</parent>
         <child>left_front_wheel_link</child>
         <axis><xyz>0 0 1</xyz></axis>
     </joint>
-
-    <link name="left_middle_wheel_link">
-        <pose>0 10 5 1.57 0 0</pose>
+    <link name="left_front_wheel_link">
+        <pose>4.61739 8.67886 2.18565 1.57 0 0</pose>
         <visual name="visual">
-            <pose>0 0 -1.1 0 0 0</pose>
-            <geometry><cylinder><radius>2.5</radius><length>2</length></cylinder></geometry>
+            <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
+            <material>
+                <diffuse>0.01 0.01 0.01 1</diffuse>
+                <pbr><metal>
+                    <roughness>0</roughness>
+                    <metalness>0</metalness>
+                </metal></pbr>
+            </material>
         </visual>
         <collision name="collision">
-            <pose>0 0 -1.1 0 0 0</pose>
-            <geometry><cylinder><radius>2.5</radius><length>2</length></cylinder></geometry>
+            <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
     </link>
-    <joint name="left_middle_wheel_joint" type="fixed">
-        <parent>base_link</parent>
-        <child>left_middle_wheel_link</child>
-    </joint>
 
-    <link name="left_back_wheel_link">
-        <pose>-10 10 5 1.57 0 0</pose>
-        <visual name="visual">
-            <pose>0 0 -1.1 0 0 0</pose>
-            <geometry><cylinder><radius>2.5</radius><length>2</length></cylinder></geometry>
-        </visual>
-        <collision name="collision">
-            <pose>0 0 -1.1 0 0 0</pose>
-            <geometry><cylinder><radius>2.5</radius><length>2</length></cylinder></geometry>
-        </collision>
-    </link>
-    <joint name="left_back_wheel_joint" type="fixed">
-        <parent>base_link</parent>
-        <child>left_back_wheel_link</child>
-    </joint>
-
-    <link name="right_front_wheel_link">
-        <pose>10 -10 5 1.57 0 0</pose>
-        <visual name="visual">
-            <pose>0 0 1.1 0 0 0</pose>
-            <geometry><cylinder><radius>2.5</radius><length>2</length></cylinder></geometry>
-        </visual>
-        <collision name="collision">
-            <pose>0 0 1.1 0 0 0</pose>
-            <geometry><cylinder><radius>2.5</radius><length>2</length></cylinder></geometry>
-        </collision>
-    </link>
-    <joint name="right_front_wheel_joint" type="fixed">
-        <parent>base_link</parent>
-        <child>right_front_wheel_link</child>
-    </joint>
-
-    <link name="right_middle_wheel_link">
-        <pose>0 -10 5 1.57 0 0</pose>
-        <visual name="visual">
-            <pose>0 0 1.1 0 0 0</pose>
-            <geometry><cylinder><radius>2.5</radius><length>2</length></cylinder></geometry>
-        </visual>
-        <collision name="collision">
-            <pose>0 0 1.1 0 0 0</pose>
-            <geometry><cylinder><radius>2.5</radius><length>2</length></cylinder></geometry>
-        </collision>
-    </link>
-    <joint name="right_middle_wheel_joint" type="fixed">
-        <parent>base_link</parent>
-        <child>right_middle_wheel_link</child>
-    </joint>
-
-    <link name="right_back_wheel_link">
-        <pose>-10 -10 5 1.57 0 0</pose>
-        <visual name="visual">
-            <pose>0 0 1.1 0 0 0</pose>
-            <geometry><cylinder><radius>2.5</radius><length>2</length></cylinder></geometry>
-        </visual>
-        <collision name="collision">
-            <pose>0 0 1.1 0 0 0</pose>
-            <geometry><cylinder><radius>2.5</radius><length>2</length></cylinder></geometry>
-        </collision>
-    </link>
-    <joint name="right_back_wheel_joint" type="fixed">
-        <parent>base_link</parent>
-        <child>right_back_wheel_link</child>
-    </joint>
 </model>
 </sdf>
