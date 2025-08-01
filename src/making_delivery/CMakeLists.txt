@@ -16,10 +16,22 @@ find_package(ros_gz_interfaces REQUIRED)
 # ament_target_dependencies(left_front_wheel rclcpp tf2_ros geometry_msgs tf2_geometry_msgs ros_gz_interfaces)
 
 add_executable(left_wheels src/left_wheels.cpp)
-ament_target_dependencies(left_wheels rclcpp tf2_ros geometry_msgs)
+target_link_libraries(left_wheels PUBLIC
+        ${geometry_msgs_TARGETS}
+        rclcpp::rclcpp
+        tf2_ros::static_transform_broadcaster_node
+        tf2_ros::tf2_ros
+)
 
 add_executable(lid src/lid.cpp)
-ament_target_dependencies(lid rclcpp tf2_ros geometry_msgs ros_gz_interfaces tf2_geometry_msgs)
+target_link_libraries(lid PUBLIC
+        ${geometry_msgs_TARGETS}
+        ${ros_gz_interfaces_TARGETS}
+        rclcpp::rclcpp
+        tf2_geometry_msgs::tf2_geometry_msgs
+        tf2_ros::static_transform_broadcaster_node
+        tf2_ros::tf2_ros
+)
 
 install(TARGETS
         left_wheels
