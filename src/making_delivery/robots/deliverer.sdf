@@ -3,6 +3,14 @@
 <model name="deliverer">
     <static>false</static>
 
+    <plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher">
+        <publish_link_pose>true</publish_link_pose>
+        <publish_collision_pose>false</publish_collision_pose>
+        <publish_visual_pose>false</publish_visual_pose>
+        <publish_nested_model_pose>false</publish_nested_model_pose>
+        <use_pose_vector_msg>false</use_pose_vector_msg>
+    </plugin>
+
     <link name="base_link">
         <pose>0 0 0 0 0 0</pose>
         <visual name="visual">
