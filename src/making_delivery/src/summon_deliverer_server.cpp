@@ -65,12 +65,18 @@ public:
                 std::to_string(request->rotation.z * M_PI / 180),
             };
             cmd(spawn_arguments);
-            const std::string bridge_arguments[] = {
+            const std::string pose_bridge_arguments[] = {
                 "ros2 run ros_gz_bridge parameter_bridge",
                 '/' + request->frame_id + "/pose@geometry_msgs/msg/TransformStamped[gz.msgs.Pose",
                 "&"
             };
-            cmd(bridge_arguments);
+            cmd(pose_bridge_arguments);
+            const std::string lidar_bridge_arguments[] = {
+                "ros2 run ros_gz_bridge parameter_bridge",
+                '/' + request->frame_id + "_lidar@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
+                "&"
+            };
+            cmd(lidar_bridge_arguments);
             response->summoned = true;
         } catch (std::exception& e) {
             response->summoned = false;
