@@ -44,7 +44,7 @@ public:
             std::string robotTemplate = openAndRead(this->get_parameter("robot_template_path").as_string());
             robotTemplate.replace(robotTemplate.find("{{ DELIVERER_NAME }}"), 20, request->frame_id);
             robotTemplate.replace(robotTemplate.rfind("{{ DELIVERER_NAME }}"), 20, request->frame_id);
-            const std::string arguments[] = {
+            const std::string spawn_arguments[] = {
                 "ros2 run ros_gz_sim create -world",
                 this->get_parameter("world_name").as_string(),
                 "-string",
@@ -64,7 +64,13 @@ public:
                 "-Y",
                 std::to_string(request->rotation.z * M_PI / 180),
             };
-            cmd(arguments);
+            cmd(spawn_arguments);
+            const std::string bridge_arguments[] = {
+                "ros2 run ros_gz_bridge parameter_bridge",
+                '/' + request->frame_id + "/pose@geometry_msgs/msg/TransformStamped[gz.msgs.Pose",
+                "&"
+            };
+            cmd(bridge_arguments);
             response->summoned = true;
         } catch (std::exception& e) {
             response->summoned = false;

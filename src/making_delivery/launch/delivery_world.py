@@ -93,11 +93,11 @@ def generate_launch_description():
         arguments=[f"/world/{world_name}/wrench@ros_gz_interfaces/msg/EntityWrench]gz.msgs.EntityWrench"]
     )
 
-    gazebo_to_ros_coordinates_bridge_node = Node(
-        package="ros_gz_bridge",
-        executable="parameter_bridge",
-        arguments=[f"/deliverer/pose@geometry_msgs/msg/TransformStamped[gz.msgs.Pose"]
-    )
+    # gazebo_to_ros_coordinates_bridge_node = Node(
+    #     package="ros_gz_bridge",
+    #     executable="parameter_bridge",
+    #     arguments=[f"/deliverer/pose@geometry_msgs/msg/TransformStamped[gz.msgs.Pose"]
+    # )
 
     # /world/empty_world/pose/info@making_delivery/msg/GazeboPoseArray[gz.msgs.Pose_V
 
@@ -109,7 +109,7 @@ def generate_launch_description():
         summon_deliverer_server_node,
         #gazebo_spawn_node,
         #ros_to_gazebo_forces_bridge_node,
-        gazebo_to_ros_coordinates_bridge_node,
+        #gazebo_to_ros_coordinates_bridge_node,
         #lid_node,
         #left_wheels_node
     ])
