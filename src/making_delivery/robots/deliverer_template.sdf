@@ -95,7 +95,7 @@
         </collision>
         <sensor name="gpu_lidar" type="gpu_lidar">
              <pose>0 0 1.4 0 0 0</pose>
-             <topic>{{ DELIVERER_NAME }}_lidar</topic>
+             <topic>/{{ DELIVERER_NAME }}_lidar</topic>
              <update_rate>50</update_rate>
              <ray>
                  <scan>
