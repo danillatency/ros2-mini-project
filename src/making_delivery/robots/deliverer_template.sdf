@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.10">
-<model name="deliverer">
+<model name="{{ DELIVERER_NAME }}">
     <static>false</static>
 
     <plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher">
@@ -95,7 +95,7 @@
         </collision>
         <sensor name="gpu_lidar" type="gpu_lidar">
              <pose>0 0 1.4 0 0 0</pose>
-             <topic>lidar</topic>
+             <topic>{{ DELIVERER_NAME }}_lidar</topic>
              <update_rate>50</update_rate>
              <ray>
                  <scan>

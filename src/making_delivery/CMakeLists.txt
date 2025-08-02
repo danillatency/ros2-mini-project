@@ -11,9 +11,13 @@ find_package(geometry_msgs REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(ros_gz_interfaces REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 
-# add_executable(left_front_wheel src/left_wheels.cpp)
-# ament_target_dependencies(left_front_wheel rclcpp tf2_ros geometry_msgs tf2_geometry_msgs ros_gz_interfaces)
+rosidl_generate_interfaces(${PROJECT_NAME}
+        srv/SummonDeliverer.srv
+        DEPENDENCIES geometry_msgs
+)
+
 
 add_executable(left_wheels src/left_wheels.cpp)
 target_link_libraries(left_wheels PUBLIC
@@ -33,10 +37,19 @@ target_link_libraries(lid PUBLIC
         tf2_ros::tf2_ros
 )
 
+rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
+add_executable(summon_deliverer src/summon_deliverer_server.cpp)
+target_link_libraries(summon_deliverer PUBLIC
+        ${geometry_msgs_TARGETS}
+        rclcpp::rclcpp
+        "${cpp_typesupport_target}"
+)
+
+
 install(TARGETS
         left_wheels
         lid
-        # left_front_wheel
+        summon_deliverer
         DESTINATION lib/${PROJECT_NAME}
 )
 

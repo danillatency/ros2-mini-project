@@ -27,6 +27,7 @@ def name_of_tag(tag, xml_path):
 def generate_launch_description():
     package_path = get_package_share_directory("making_delivery")
     world_path = os.path.join(package_path, "worlds", "delivery_world.sdf")
+    robot_template_path = os.path.join(package_path, "robots", "deliverer_template.sdf")
     model_path = os.path.join(package_path, "robots", "deliverer.sdf")
     rviz_config_path = os.path.join(package_path, "rviz", "config.rviz")
     world_name = name_of_tag("world", world_path)
@@ -71,11 +72,20 @@ def generate_launch_description():
         launch_arguments={"gz_args": world_path}.items()
     )
 
-    gazebo_spawn_node = Node(
-        package="ros_gz_sim",
-        executable="create",
-        arguments=["-world", world_name, "-file", model_path, model_name, "-x", "0", "-y", "-30", "-z", "0"]
+    summon_deliverer_server_node = Node(
+        package="making_delivery",
+        executable="summon_deliverer",
+        parameters=[{
+            "robot_template_path": robot_template_path,
+            "world_name": world_name
+        }]
     )
+
+    # gazebo_spawn_node = Node(
+    #     package="ros_gz_sim",
+    #     executable="create",
+    #     arguments=["-world", world_name, "-file", model_path, model_name, "-x", "0", "-y", "-30", "-z", "0"]
+    # )
 
     ros_to_gazebo_forces_bridge_node = Node(
         package="ros_gz_bridge",
@@ -96,9 +106,10 @@ def generate_launch_description():
         # robot_state_publisher_node,
         # rviz_node,
         gazebo_world_launcher,
-        gazebo_spawn_node,
-        ros_to_gazebo_forces_bridge_node,
+        summon_deliverer_server_node,
+        #gazebo_spawn_node,
+        #ros_to_gazebo_forces_bridge_node,
         gazebo_to_ros_coordinates_bridge_node,
-        lid_node,
+        #lid_node,
         #left_wheels_node
     ])
