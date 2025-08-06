@@ -12,12 +12,14 @@ find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(ros_gz_interfaces REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+find_package(ros_gz_bridge REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
         srv/SummonDeliverer.srv
+        srv/SubscribeTransformStreamer.srv
         DEPENDENCIES geometry_msgs
 )
-
+rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 add_executable(left_wheels src/left_wheels.cpp)
 target_link_libraries(left_wheels PUBLIC
@@ -37,14 +39,20 @@ target_link_libraries(lid PUBLIC
         tf2_ros::tf2_ros
 )
 
-rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
 add_executable(summon_deliverer src/summon_deliverer_server.cpp)
 target_link_libraries(summon_deliverer PUBLIC
         ${geometry_msgs_TARGETS}
         rclcpp::rclcpp
+        ros_gz_bridge::ros_gz_bridge
         "${cpp_typesupport_target}"
 )
 
+#add_executable(streamer src/transform_streamer.cpp)
+#target_link_libraries(streamer PUBLIC
+#        ${geometry_msgs_TARGETS}
+#        rclcpp::rclcpp
+#        "${cpp_typesupport_target}"
+#)
 
 install(TARGETS
         left_wheels
@@ -60,6 +68,7 @@ install(DIRECTORY
         textures
         worlds
         rviz
+        bridge_templates
         DESTINATION share/${PROJECT_NAME}
 )
 
