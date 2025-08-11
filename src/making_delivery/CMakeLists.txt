@@ -39,8 +39,9 @@ target_link_libraries(lid PUBLIC
         tf2_ros::tf2_ros
 )
 
-add_executable(summon_deliverer src/summon_deliverer_server.cpp)
-target_link_libraries(summon_deliverer PUBLIC
+add_executable(package_executor src/package_executor.cpp)
+target_include_directories(package_executor PUBLIC include)
+target_link_libraries(package_executor PUBLIC
         ${geometry_msgs_TARGETS}
         rclcpp::rclcpp
         ros_gz_bridge::ros_gz_bridge
@@ -57,7 +58,7 @@ target_link_libraries(summon_deliverer PUBLIC
 install(TARGETS
         left_wheels
         lid
-        summon_deliverer
+        package_executor
         DESTINATION lib/${PROJECT_NAME}
 )
 

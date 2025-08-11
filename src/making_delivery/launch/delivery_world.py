@@ -70,9 +70,9 @@ def generate_launch_description():
         launch_arguments={"gz_args": world_path}.items()
     )
 
-    summon_deliverer_server_node = Node(
+    delivery_composition_node = Node(
         package="making_delivery",
-        executable="summon_deliverer",
+        executable="package_executor",
         parameters=[{
             "robot_template_path": robot_template_path,
             "world_name": world_name
@@ -104,7 +104,7 @@ def generate_launch_description():
         # robot_state_publisher_node,
         # rviz_node,
         gazebo_world_launcher,
-        summon_deliverer_server_node,
+        delivery_composition_node,
         #gazebo_spawn_node,
         #ros_to_gazebo_forces_bridge_node,
         #gazebo_to_ros_coordinates_bridge_node,
