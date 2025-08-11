@@ -30,7 +30,6 @@ def generate_launch_description():
     robot_template_path = os.path.join(package_path, "robots", "deliverer_template.sdf")
     rviz_config_path = os.path.join(package_path, "rviz", "config.rviz")
     world_name = name_of_tag("world", world_path)
-    pose_from_gazebo_template_path = os.path.join(package_path, "bridge_templates", "pose_from_gazebo.yaml")
 
     # robot_state_publisher_node = Node(
     #     package="robot_state_publisher",
@@ -76,8 +75,7 @@ def generate_launch_description():
         executable="summon_deliverer",
         parameters=[{
             "robot_template_path": robot_template_path,
-            "world_name": world_name,
-            "pose_from_gazebo": pose_from_gazebo_template_path
+            "world_name": world_name
         }]
     )
 
