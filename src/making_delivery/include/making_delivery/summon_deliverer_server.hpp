@@ -44,19 +44,21 @@ public:
 
     void establishBridge(const std::string &direction, const std::string &rosMessageType,
                          const std::string &gazeboMessageType, const std::string& bridgingTopic,
-                         const std::string &reliability, const std::string &durability,
-                         const std::string &frameId) {
+                         const std::string &reliability, const std::string &durability) {
+        std::string bridgeName = "ros_gz_bridge_" + std::to_string(this->delivererBridges.size());
         this->delivererBridges.push_back(std::make_shared<ros_gz_bridge::RosGzBridge>(
             rclcpp::NodeOptions().parameter_overrides({
-                rclcpp::Parameter("bridge_names", std::vector({"ros_gz_bridge_" + frameId})),
-                rclcpp::Parameter("bridges.ros_gz_bridge.ros_type_name", rosMessageType),
-                rclcpp::Parameter("bridges.ros_gz_bridge.ros_topic_name", bridgingTopic),
-                rclcpp::Parameter("bridges.ros_gz_bridge.gz_type_name", gazeboMessageType),
-                rclcpp::Parameter("bridges.ros_gz_bridge.gz_topic_name", bridgingTopic),
-                rclcpp::Parameter("bridges.ros_gz_bridge.direction", direction),
+                rclcpp::Parameter("bridge_names", std::vector({bridgeName})),
+                rclcpp::Parameter("bridges." + bridgeName + ".ros_type_name", rosMessageType),
+                rclcpp::Parameter("bridges." + bridgeName + ".ros_topic_name", bridgingTopic),
+                rclcpp::Parameter("bridges." + bridgeName + ".gz_type_name", gazeboMessageType),
+                rclcpp::Parameter("bridges." + bridgeName + ".gz_topic_name", bridgingTopic),
+                rclcpp::Parameter("bridges." + bridgeName + ".direction", direction),
                 rclcpp::Parameter("qos_overrides." + bridgingTopic + ".publisher.reliability", reliability),
                 rclcpp::Parameter("qos_overrides." + bridgingTopic + ".publisher.durability", durability),
                 rclcpp::Parameter("qos_overrides." + bridgingTopic + ".publisher.history", "keep_last")
+            }).arguments({
+                "--ros-args", "-r", "__node:=" + bridgeName
             })));
         this->executor->add_node(this->delivererBridges.back());
     }
@@ -90,9 +92,9 @@ public:
                 RCLCPP_WARN(rclcpp::get_logger("rclcpp"), "Waiting for gz create service...");
             }
             this->establishBridge("GZ_TO_ROS", "geometry_msgs/msg/TransformStamped", "gz.msgs.Pose",
-                                  '/' + request->frame_id + "/pose", "best_effort", "volatile", request->frame_id);
+                                  '/' + request->frame_id + "/pose", "best_effort", "volatile");
             this->establishBridge("GZ_TO_ROS", "sensor_msgs/msg/LaserScan", "gz.msgs.LaserScan",
-                                  '/' + request->frame_id + "_lidar", "best_effort", "volatile", request->frame_id);
+                                  '/' + request->frame_id + "_lidar", "best_effort", "volatile");
             response->summoned = true;
         } catch (std::exception &e) {
             response->summoned = false;
