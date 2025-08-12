@@ -29,15 +29,16 @@ def generate_launch_description():
     world_path = os.path.join(package_path, "worlds", "delivery_world.sdf")
     robot_template_path = os.path.join(package_path, "robots", "deliverer_template.sdf")
     rviz_config_path = os.path.join(package_path, "rviz", "config.rviz")
+    rviz_model_path = os.path.join(package_path, "rviz", "deliverer_0.sdf")
     world_name = name_of_tag("world", world_path)
 
-    # robot_state_publisher_node = Node(
-    #     package="robot_state_publisher",
-    #     executable="robot_state_publisher",
-    #     parameters=[{
-    #         "robot_description": open(model_path, 'r', encoding="utf-8").read()
-    #     }]
-    # )
+    robot_state_publisher_node = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        parameters=[{
+            "robot_description": open(rviz_model_path, 'r', encoding="utf-8").read()
+        }]
+    )
 
     rviz_node = Node(
         package="rviz2",
@@ -101,8 +102,8 @@ def generate_launch_description():
 
     return LaunchDescription([
         SetEnvironmentVariable("GZ_SIM_RESOURCE_PATH", os.path.join(package_path, "textures")),
-        # robot_state_publisher_node,
-        # rviz_node,
+        robot_state_publisher_node,
+        rviz_node,
         gazebo_world_launcher,
         delivery_composition_node,
         #gazebo_spawn_node,
