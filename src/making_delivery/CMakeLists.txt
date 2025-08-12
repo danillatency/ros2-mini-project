@@ -61,7 +61,6 @@ install(DIRECTORY
         textures
         worlds
         rviz
-        bridge_templates
         DESTINATION share/${PROJECT_NAME}
 )
 
