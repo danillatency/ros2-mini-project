@@ -1,6 +1,5 @@
 # Blender 4.5.0
 # www.blender.org
-mtllib rover.mtl
 o Rover
 v 6.128974 7.425012 16.232983
 v 6.128980 -7.146011 16.232983

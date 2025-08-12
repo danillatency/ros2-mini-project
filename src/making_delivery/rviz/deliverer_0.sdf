@@ -11,13 +11,14 @@
         <use_pose_vector_msg>false</use_pose_vector_msg>
     </plugin>
 
-    <link name="base_link">
+    <link name="deliverer_0/base_link">
         <pose>0 0 0 0 0 0</pose>
         <visual name="visual">
             <geometry><mesh><uri>file:///home/danil/Documents/ROSWorkspaces/RosMiniProject/src/making_delivery/models/rover.obj</uri></mesh></geometry>
             <material>
                 <diffuse>1 1 1 1</diffuse>
                 <pbr><metal>
+                    <albedo_map>resources://T_Rover_BC_4K.png</albedo_map>
                     <roughness>1</roughness>
                     <metalness>0</metalness>
                 </metal></pbr>
@@ -36,21 +37,22 @@
           </inertia>
         </inertial>
     </link>
-    <joint name="lid_joint" type="revolute">
-        <parent>base_link</parent>
-        <child>lid_link</child>
+    <joint name="deliverer_0/lid_joint" type="revolute">
+        <parent>deliverer_0/base_link</parent>
+        <child>deliverer_0/lid_link</child>
         <axis>
             <xyz>0 1 0</xyz>
             <limit><lower>0</lower><upper>1.29</upper></limit>
         </axis>
     </joint>
-    <link name="lid_link">
+    <link name="deliverer_0/lid_link">
         <pose>5.72194 0.139501 17.771 0 0 0</pose>
         <visual name="visual">
             <geometry><mesh><uri>file:///home/danil/Documents/ROSWorkspaces/RosMiniProject/src/making_delivery/models/lid.obj</uri></mesh></geometry>
             <material>
                 <diffuse>1 1 1 1</diffuse>
                 <pbr><metal>
+                    <albedo_map>resources://T_Lid_BC_4K.png</albedo_map>
                     <roughness>1</roughness>
                     <metalness>0</metalness>
                 </metal></pbr>
@@ -70,17 +72,18 @@
         </inertial>
     </link>
 
-    <joint name="lidar_joint" type="fixed">
-        <parent>base_link</parent>
-        <child>lidar_link</child>
+    <joint name="deliverer_0/lidar_joint" type="fixed">
+        <parent>deliverer_0/base_link</parent>
+        <child>deliverer_0/lidar_link</child>
     </joint>
-    <link name="lidar_link">
+    <link name="deliverer_0/lidar_link">
         <pose>9.07392 0.361634 17.7084 0 0 0</pose>
         <visual name="visual">
             <geometry><mesh><uri>file:///home/danil/Documents/ROSWorkspaces/RosMiniProject/src/making_delivery/models/lidar.obj</uri></mesh></geometry>
             <material>
                 <diffuse>1 1 1 1</diffuse>
                 <pbr><metal>
+                    <albedo_map>resources://T_Lidar_BC_4K.png</albedo_map>
                     <roughness>1</roughness>
                     <metalness>0</metalness>
                 </metal></pbr>
@@ -120,17 +123,18 @@
         </sensor>
     </link>
 
-    <joint name="flag_joint" type="fixed">
-        <parent>base_link</parent>
-        <child>flag_link</child>
+    <joint name="deliverer_0/flag_joint" type="fixed">
+        <parent>deliverer_0/base_link</parent>
+        <child>deliverer_0/flag_link</child>
     </joint>
-    <link name="flag_link">
+    <link name="deliverer_0/flag_link">
         <pose>3.0149 -7.38887 14.4931 0 0 0</pose>
         <visual name="visual">
             <geometry><mesh><uri>file:///home/danil/Documents/ROSWorkspaces/RosMiniProject/src/making_delivery/models/flag.obj</uri></mesh></geometry>
             <material>
                 <diffuse>1 1 1 1</diffuse>
                 <pbr><metal>
+                    <albedo_map>resources://T_Flag_BC_4K.png</albedo_map>
                     <roughness>1</roughness>
                     <metalness>0</metalness>
                 </metal></pbr>
@@ -139,12 +143,12 @@
     </link>
 
 
-    <joint name="right_back_wheel_joint" type="revolute">
-        <parent>base_link</parent>
-        <child>right_back_wheel_link</child>
+    <joint name="deliverer_0/right_back_wheel_joint" type="revolute">
+        <parent>deliverer_0/base_link</parent>
+        <child>deliverer_0/right_back_wheel_link</child>
         <axis><xyz>0 0 1</xyz></axis>
     </joint>
-    <link name="right_back_wheel_link">
+    <link name="deliverer_0/right_back_wheel_link">
         <pose>-4.61739 -8.67886 2.18565 1.57 0 0</pose>
         <visual name="visual">
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
@@ -161,12 +165,12 @@
         </collision>
     </link>
 
-    <joint name="right_middle_wheel_joint" type="revolute">
-        <parent>base_link</parent>
-        <child>right_middle_wheel_link</child>
+    <joint name="deliverer_0/right_middle_wheel_joint" type="revolute">
+        <parent>deliverer_0/base_link</parent>
+        <child>deliverer_0/right_middle_wheel_link</child>
         <axis><xyz>0 0 1</xyz></axis>
     </joint>
-    <link name="right_middle_wheel_link">
+    <link name="deliverer_0/right_middle_wheel_link">
         <pose>0 -8.67886 2.18565 1.57 0 0</pose>
         <visual name="visual">
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
@@ -183,12 +187,12 @@
         </collision>
     </link>
 
-    <joint name="right_front_wheel_joint" type="revolute">
-        <parent>base_link</parent>
-        <child>right_front_wheel_link</child>
+    <joint name="deliverer_0/right_front_wheel_joint" type="revolute">
+        <parent>deliverer_0/base_link</parent>
+        <child>deliverer_0/right_front_wheel_link</child>
         <axis><xyz>0 0 1</xyz></axis>
     </joint>
-    <link name="right_front_wheel_link">
+    <link name="deliverer_0/right_front_wheel_link">
         <pose>4.61739 -8.67886 2.18565 1.57 0 0</pose>
         <visual name="visual">
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
@@ -206,12 +210,12 @@
     </link>
 
 
-    <joint name="left_back_wheel_joint" type="revolute">
-        <parent>base_link</parent>
-        <child>left_back_wheel_link</child>
+    <joint name="deliverer_0/left_back_wheel_joint" type="revolute">
+        <parent>deliverer_0/base_link</parent>
+        <child>deliverer_0/left_back_wheel_link</child>
         <axis><xyz>0 0 1</xyz></axis>
     </joint>
-    <link name="left_back_wheel_link">
+    <link name="deliverer_0/left_back_wheel_link">
         <pose>-4.61739 8.67886 2.18565 1.57 0 0</pose>
         <visual name="visual">
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
@@ -228,12 +232,12 @@
         </collision>
     </link>
 
-    <joint name="left_middle_wheel_joint" type="revolute">
-        <parent>base_link</parent>
-        <child>left_middle_wheel_link</child>
+    <joint name="deliverer_0/left_middle_wheel_joint" type="revolute">
+        <parent>deliverer_0/base_link</parent>
+        <child>deliverer_0/left_middle_wheel_link</child>
         <axis><xyz>0 0 1</xyz></axis>
     </joint>
-    <link name="left_middle_wheel_link">
+    <link name="deliverer_0/left_middle_wheel_link">
         <pose>0 8.67886 2.18565 1.57 0 0</pose>
         <visual name="visual">
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
@@ -250,12 +254,12 @@
         </collision>
     </link>
 
-    <joint name="left_front_wheel_joint" type="revolute">
-        <parent>base_link</parent>
-        <child>left_front_wheel_link</child>
+    <joint name="deliverer_0/left_front_wheel_joint" type="revolute">
+        <parent>deliverer_0/base_link</parent>
+        <child>deliverer_0/left_front_wheel_link</child>
         <axis><xyz>0 0 1</xyz></axis>
     </joint>
-    <link name="left_front_wheel_link">
+    <link name="deliverer_0/left_front_wheel_link">
         <pose>4.61739 8.67886 2.18565 1.57 0 0</pose>
         <visual name="visual">
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
