@@ -46,24 +46,6 @@ def generate_launch_description():
         arguments=["-d", rviz_config_path]
     )
 
-    left_front_wheel_rotating = Node(
-        package="making_delivery",
-        executable="left_front_wheel",
-        output="screen"
-    )
-
-    left_wheels_node = Node(
-        package="making_delivery",
-        executable="left_wheels",
-        output="screen"
-    )
-
-    lid_node = Node(
-        package="making_delivery",
-        executable="lid",
-        output="screen"
-    )
-
     gazebo_world_launcher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(get_package_share_directory("ros_gz_sim"), "launch", "gz_sim.launch.py")
@@ -80,25 +62,17 @@ def generate_launch_description():
         }]
     )
 
-    # gazebo_spawn_node = Node(
-    #     package="ros_gz_sim",
-    #     executable="create",
-    #     arguments=["-world", world_name, "-file", model_path, model_name, "-x", "0", "-y", "-30", "-z", "0"]
-    # )
-
     ros_to_gazebo_forces_bridge_node = Node(
         package="ros_gz_bridge",
         executable="parameter_bridge",
         arguments=[f"/world/{world_name}/wrench@ros_gz_interfaces/msg/EntityWrench]gz.msgs.EntityWrench"]
     )
 
-    # gazebo_to_ros_coordinates_bridge_node = Node(
-    #     package="ros_gz_bridge",
-    #     executable="parameter_bridge",
-    #     arguments=[f"/deliverer/pose@geometry_msgs/msg/TransformStamped[gz.msgs.Pose"]
-    # )
-
-    # /world/empty_world/pose/info@making_delivery/msg/GazeboPoseArray[gz.msgs.Pose_V
+    ros_to_gazebo_persistent_forces_bridge_node = Node(
+        package="ros_gz_bridge",
+        executable="parameter_bridge",
+        arguments=[f"/world/{world_name}/wrench/persistent@ros_gz_interfaces/msg/EntityWrench]gz.msgs.EntityWrench"]
+    )
 
     return LaunchDescription([
         SetEnvironmentVariable("GZ_SIM_RESOURCE_PATH", os.path.join(package_path, "textures")),
@@ -106,9 +80,6 @@ def generate_launch_description():
         rviz_node,
         gazebo_world_launcher,
         delivery_composition_node,
-        #gazebo_spawn_node,
-        #ros_to_gazebo_forces_bridge_node,
-        #gazebo_to_ros_coordinates_bridge_node,
-        #lid_node,
-        #left_wheels_node
+        ros_to_gazebo_forces_bridge_node,
+        ros_to_gazebo_persistent_forces_bridge_node
     ])
