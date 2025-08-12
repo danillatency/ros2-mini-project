@@ -29,12 +29,7 @@
             <geometry><box><size>24.6744 14.86332 17.8383</size></box></geometry>
         </collision>
         <inertial>
-          <mass>100.0</mass>
-          <inertia>
-            <ixx>0.1</ixx>
-            <iyy>0.1</iyy>
-            <izz>0.1</izz>
-          </inertia>
+          <mass>15.0</mass>
         </inertial>
     </link>
     <joint name="lid_joint" type="revolute">
@@ -64,11 +59,6 @@
         </collision>
         <inertial>
           <mass>5.0</mass>
-          <inertia>
-            <ixx>0.1</ixx>
-            <iyy>0.1</iyy>
-            <izz>0.1</izz>
-          </inertia>
         </inertial>
     </link>
 
@@ -93,6 +83,9 @@
             <pose>0 0 1.5 0 0 0</pose>
             <geometry><box><size>3.5 3.5 2.36</size></box></geometry>
         </collision>
+        <inertial>
+            <mass>0.5</mass>
+        </inertial>
         <sensor name="gpu_lidar" type="gpu_lidar">
              <pose>0 0 1.4 0 0 0</pose>
              <topic>/{{ DELIVERER_NAME }}_lidar</topic>
@@ -163,6 +156,9 @@
         <collision name="collision">
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
+        <inertial>
+            <mass>3.0</mass>
+        </inertial>
     </link>
 
     <joint name="right_middle_wheel_joint" type="revolute">
@@ -185,6 +181,9 @@
         <collision name="collision">
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
+        <inertial>
+            <mass>3.0</mass>
+        </inertial>
     </link>
 
     <joint name="right_front_wheel_joint" type="revolute">
@@ -207,6 +206,9 @@
         <collision name="collision">
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
+        <inertial>
+            <mass>3.0</mass>
+        </inertial>
     </link>
 
 
@@ -230,6 +232,9 @@
         <collision name="collision">
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
+        <inertial>
+            <mass>3.0</mass>
+        </inertial>
     </link>
 
     <joint name="left_middle_wheel_joint" type="revolute">
@@ -252,6 +257,9 @@
         <collision name="collision">
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
+        <inertial>
+            <mass>3.0</mass>
+        </inertial>
     </link>
 
     <joint name="left_front_wheel_joint" type="revolute">
@@ -274,6 +282,9 @@
         <collision name="collision">
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
+        <inertial>
+            <mass>3.0</mass>
+        </inertial>
     </link>
 
 </model>
