@@ -27,7 +27,7 @@ inline std::string openAndRead(const std::string &filename) {
 
 class SummonDeliverer final : public rclcpp::Node {
 public:
-    rclcpp::Service<making_delivery::srv::SummonDeliverer>::SharedPtr summonDeliverer;
+    rclcpp::Service<making_delivery::srv::SummonDeliverer>::SharedPtr summonDelivererServer;
     rclcpp::Client<making_delivery::srv::SubscribeTransformStreamer>::SharedPtr subscribeStreamerOnPoseClient;
     rclcpp::executors::MultiThreadedExecutor *executor;
     std::vector<std::shared_ptr<ros_gz_bridge::RosGzBridge> > delivererBridges;
@@ -37,7 +37,7 @@ public:
         this->executor = executor;
         this->declare_parameter<std::string>("robot_template_path", "");
         this->declare_parameter<std::string>("world_name", "");
-        this->summonDeliverer = this->create_service<making_delivery::srv::SummonDeliverer>(
+        this->summonDelivererServer = this->create_service<making_delivery::srv::SummonDeliverer>(
             "/summon_deliverer", std::bind(&SummonDeliverer::summon, this,
                                            std::placeholders::_1, std::placeholders::_2));
         this->subscribeStreamerOnPoseClient = this->create_client<making_delivery::srv::SubscribeTransformStreamer>(
