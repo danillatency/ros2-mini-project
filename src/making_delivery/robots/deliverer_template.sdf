@@ -153,6 +153,16 @@
                 </metal></pbr>
             </material>
         </visual>
+        <visual name="stick">
+            <geometry><box><size>1 2 2.5</size></box></geometry>
+            <material>
+                <diffuse>1 0.831 0 1</diffuse>
+                <pbr><metal>
+                    <roughness>0</roughness>
+                    <metalness>0</metalness>
+                </metal></pbr>
+            </material>
+        </visual>
         <collision name="collision">
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
@@ -178,6 +188,16 @@
                 </metal></pbr>
             </material>
         </visual>
+        <visual name="stick">
+            <geometry><box><size>1 2 2.5</size></box></geometry>
+            <material>
+                <diffuse>1 0.831 0 1</diffuse>
+                <pbr><metal>
+                    <roughness>0</roughness>
+                    <metalness>0</metalness>
+                </metal></pbr>
+            </material>
+        </visual>
         <collision name="collision">
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
@@ -197,6 +217,16 @@
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
             <material>
                 <diffuse>0.01 0.01 0.01 1</diffuse>
+                <pbr><metal>
+                    <roughness>0</roughness>
+                    <metalness>0</metalness>
+                </metal></pbr>
+            </material>
+        </visual>
+        <visual name="stick">
+            <geometry><box><size>1 2 2.5</size></box></geometry>
+            <material>
+                <diffuse>1 0.831 0 1</diffuse>
                 <pbr><metal>
                     <roughness>0</roughness>
                     <metalness>0</metalness>
@@ -229,6 +259,16 @@
                 </metal></pbr>
             </material>
         </visual>
+        <visual name="stick">
+            <geometry><box><size>1 2 2.5</size></box></geometry>
+            <material>
+                <diffuse>1 0.831 0 1</diffuse>
+                <pbr><metal>
+                    <roughness>0</roughness>
+                    <metalness>0</metalness>
+                </metal></pbr>
+            </material>
+        </visual>
         <collision name="collision">
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
@@ -254,6 +294,16 @@
                 </metal></pbr>
             </material>
         </visual>
+        <visual name="stick">
+            <geometry><box><size>1 2 2.5</size></box></geometry>
+            <material>
+                <diffuse>1 0.831 0 1</diffuse>
+                <pbr><metal>
+                    <roughness>0</roughness>
+                    <metalness>0</metalness>
+                </metal></pbr>
+            </material>
+        </visual>
         <collision name="collision">
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
@@ -273,6 +323,16 @@
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
             <material>
                 <diffuse>0.01 0.01 0.01 1</diffuse>
+                <pbr><metal>
+                    <roughness>0</roughness>
+                    <metalness>0</metalness>
+                </metal></pbr>
+            </material>
+        </visual>
+        <visual name="stick">
+            <geometry><box><size>1 2 2.5</size></box></geometry>
+            <material>
+                <diffuse>1 0.831 0 1</diffuse>
                 <pbr><metal>
                     <roughness>0</roughness>
                     <metalness>0</metalness>
