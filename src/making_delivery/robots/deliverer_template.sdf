@@ -25,8 +25,8 @@
             </material>
         </visual>
         <collision name="collision">
-            <pose>0 0 8.92 0 0 0</pose>
-            <geometry><box><size>24.6744 14.86332 17.8383</size></box></geometry>
+            <pose>0 0 9.5 0 0 0</pose>
+            <geometry><box><size>24.6744 14.86332 16</size></box></geometry>
         </collision>
         <inertial>
           <mass>15.0</mass>
