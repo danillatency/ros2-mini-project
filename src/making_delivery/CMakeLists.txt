@@ -17,10 +17,8 @@ find_package(ros_gz_bridge REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
         srv/SummonDeliverer.srv
         srv/SubscribeTransformStreamer.srv
-        srv/StartRightWheels.srv
-        srv/StopRightWheels.srv
-        srv/StartLeftWheels.srv
-        srv/StopLeftWheels.srv
+        srv/TorqueRightWheels.srv
+        srv/TorqueLeftWheels.srv
         DEPENDENCIES geometry_msgs
 )
 rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
