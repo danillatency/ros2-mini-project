@@ -139,7 +139,10 @@
     <joint name="right_back_wheel_joint" type="revolute">
         <parent>base_link</parent>
         <child>right_back_wheel_link</child>
-        <axis><xyz>0 0 1</xyz></axis>
+        <axis>
+            <xyz>0 0 1</xyz>
+            <dynamics><damping>10</damping></dynamics>
+        </axis>
     </joint>
     <link name="right_back_wheel_link">
         <pose>-4.61739 -8.67886 2.18565 1.57 0 0</pose>
@@ -167,14 +170,17 @@
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
         <inertial>
-            <mass>3.0</mass>
+            <mass>1.0</mass>
         </inertial>
     </link>
 
     <joint name="right_middle_wheel_joint" type="revolute">
         <parent>base_link</parent>
         <child>right_middle_wheel_link</child>
-        <axis><xyz>0 0 1</xyz></axis>
+        <axis>
+            <xyz>0 0 1</xyz>
+            <dynamics><damping>10</damping></dynamics>
+        </axis>
     </joint>
     <link name="right_middle_wheel_link">
         <pose>0 -8.67886 2.18565 1.57 0 0</pose>
@@ -202,14 +208,17 @@
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
         <inertial>
-            <mass>3.0</mass>
+            <mass>1.0</mass>
         </inertial>
     </link>
 
     <joint name="right_front_wheel_joint" type="revolute">
         <parent>base_link</parent>
         <child>right_front_wheel_link</child>
-        <axis><xyz>0 0 1</xyz></axis>
+        <axis>
+            <xyz>0 0 1</xyz>
+            <dynamics><damping>10</damping></dynamics>
+        </axis>
     </joint>
     <link name="right_front_wheel_link">
         <pose>4.61739 -8.67886 2.18565 1.57 0 0</pose>
@@ -237,7 +246,7 @@
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
         <inertial>
-            <mass>3.0</mass>
+            <mass>1.0</mass>
         </inertial>
     </link>
 
@@ -245,7 +254,10 @@
     <joint name="left_back_wheel_joint" type="revolute">
         <parent>base_link</parent>
         <child>left_back_wheel_link</child>
-        <axis><xyz>0 0 1</xyz></axis>
+        <axis>
+            <xyz>0 0 1</xyz>
+            <dynamics><damping>10</damping></dynamics>
+        </axis>
     </joint>
     <link name="left_back_wheel_link">
         <pose>-4.61739 8.67886 2.18565 1.57 0 0</pose>
@@ -273,14 +285,17 @@
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
         <inertial>
-            <mass>3.0</mass>
+            <mass>1.0</mass>
         </inertial>
     </link>
 
     <joint name="left_middle_wheel_joint" type="revolute">
         <parent>base_link</parent>
         <child>left_middle_wheel_link</child>
-        <axis><xyz>0 0 1</xyz></axis>
+        <axis>
+            <xyz>0 0 1</xyz>
+            <dynamics><damping>10</damping></dynamics>
+        </axis>
     </joint>
     <link name="left_middle_wheel_link">
         <pose>0 8.67886 2.18565 1.57 0 0</pose>
@@ -308,14 +323,17 @@
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
         <inertial>
-            <mass>3.0</mass>
+            <mass>1.0</mass>
         </inertial>
     </link>
 
     <joint name="left_front_wheel_joint" type="revolute">
         <parent>base_link</parent>
         <child>left_front_wheel_link</child>
-        <axis><xyz>0 0 1</xyz></axis>
+        <axis>
+            <xyz>0 0 1</xyz>
+            <dynamics><damping>10</damping></dynamics>
+        </axis>
     </joint>
     <link name="left_front_wheel_link">
         <pose>4.61739 8.67886 2.18565 1.57 0 0</pose>
@@ -343,7 +361,7 @@
             <geometry><cylinder><radius>2.18565</radius><length>2</length></cylinder></geometry>
         </collision>
         <inertial>
-            <mass>3.0</mass>
+            <mass>1.0</mass>
         </inertial>
     </link>
 
