@@ -59,8 +59,8 @@ public:
         message.wrench.force.y = 0;
         message.wrench.force.z = 0;
         message.wrench.torque.x = 0;
-        message.wrench.torque.y = 0;
-        message.wrench.torque.z = request->torque;
+        message.wrench.torque.y = request->torque;
+        message.wrench.torque.z = 0;
         message.entity.name = request->frame_id + "::left_front_wheel_link";
         this->persistentForcePublisher->publish(message);
         message.entity.name = request->frame_id + "::left_middle_wheel_link";
