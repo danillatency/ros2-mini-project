@@ -74,6 +74,12 @@ def generate_launch_description():
         arguments=[f"/world/{world_name}/wrench/persistent@ros_gz_interfaces/msg/EntityWrench]gz.msgs.EntityWrench"]
     )
 
+    ros_to_gazebo_clear_forces_bridge_node = Node(
+        package="ros_gz_bridge",
+        executable="parameter_bridge",
+        arguments=[f"/world/{world_name}/wrench/clear@ros_gz_interfaces/msg/Entity]gz.msgs.Entity"]
+    )
+
     return LaunchDescription([
         SetEnvironmentVariable("GZ_SIM_RESOURCE_PATH", os.path.join(package_path, "textures")),
         robot_state_publisher_node,
@@ -81,5 +87,6 @@ def generate_launch_description():
         gazebo_world_launcher,
         delivery_composition_node,
         ros_to_gazebo_forces_bridge_node,
-        ros_to_gazebo_persistent_forces_bridge_node
+        ros_to_gazebo_persistent_forces_bridge_node,
+        ros_to_gazebo_clear_forces_bridge_node
     ])
