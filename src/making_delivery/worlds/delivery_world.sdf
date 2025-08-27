@@ -65,6 +65,59 @@
             </link>
         </model>
 
+        <model name="cubes_environment">
+            <static>true</static>
+            <link name="link">
+                <collision name="collision_sofa">
+                    <pose>78.39 68.56 19.41 0 0 0.4</pose>
+                    <geometry><box><size>40 100 40</size></box></geometry>
+                </collision>
+                <collision name="collision_straight_tabouret">
+                    <pose>0 -42.5 11 0 0 0</pose>
+                    <geometry><box><size>25 25 40</size></box></geometry>
+                </collision>
+                <collision name="collision_twist_tabouret">
+                    <pose>-87 78.44 11 0 0 0.56</pose>
+                    <geometry><box><size>25 25 40</size></box></geometry>
+                </collision>
+                <collision name="collision_stillage">
+                    <pose>-104.22 -104.78 15.5 0 0 0</pose>
+                    <geometry><box><size>25 25 40</size></box></geometry>
+                </collision>
+                <collision name="collision_closet">
+                    <pose>-104.22 0 15.5 0 0 0</pose>
+                    <geometry><box><size>25 64 40</size></box></geometry>
+                </collision>
+                <collision name="collision_tabouret_wall">
+                    <pose>0 120.72 15.5 0 0 0</pose>
+                    <geometry><box><size>260 12 40</size></box></geometry>
+                </collision>
+                <collision name="collision_closet_wall">
+                    <pose>-120.72 0 15.5 0 0 0</pose>
+                    <geometry><box><size>12 260 40</size></box></geometry>
+                </collision>
+                <collision name="collision_sofa_wall">
+                    <pose>120.72 0 15.5 0 0 0</pose>
+                    <geometry><box><size>12 260 40</size></box></geometry>
+                </collision>
+                <collision name="collision_stillage_wall">
+                    <pose>0 -120.72 15.5 0 0 0</pose>
+                    <geometry><box><size>260 12 40</size></box></geometry>
+                </collision>
+                <visual name="visual">
+                    <geometry><mesh><uri>file:///home/danil/Documents/ROSWorkspaces/RosMiniProject/src/making_delivery/models/furniture.obj</uri></mesh></geometry>
+                    <material>
+                        <diffuse>1 1 1 1</diffuse>
+                        <pbr><metal>
+                            <albedo_map>resources://T_Furniture_BC_4K.png</albedo_map>
+                            <roughness>1</roughness>
+                            <metalness>0</metalness>
+                        </metal></pbr>
+                    </material>
+                </visual>
+            </link>
+        </model>
+
         <gui fullscreen="0">  <!--default from gazebo sim docs-->
             <plugin filename="MinimalScene" name="3D View">
               <gz-gui>
